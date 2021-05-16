@@ -1,6 +1,11 @@
 require('dotenv').config();
 
-import express, { Request, Response, NextFunction } from 'express';
+import express, {
+  Request,
+  Response,
+  NextFunction,
+  RequestHandler,
+} from 'express';
 
 import todoRoutes from './routes/todos';
 
@@ -8,6 +13,10 @@ const PORT = process.env.PORT;
 const app = express();
 
 app.use(express.json());
+
+app.use('/status', (req, res, next) => {
+  res.json({ status: 'OK' });
+});
 
 app.use('/todos', todoRoutes);
 
